@@ -1,0 +1,8 @@
+{
+	"str_pacages" : "Paketlar",
+	"str_localization" : "Localizatsiya",
+	"str_local_database" : "Local Data Baza",
+	"str_networking" : "Networking",
+	"str_welcome": "O'zbekistonga xush kelibsiz",
+	"str_flutter_text": "Flutter - bu bitta kod bazasidan chiroyli, mahalliy kompilyatsiya qilingan, ko'p platformali ilovalarni yaratish uchun Google tomonidan yaratilgan ochiq manbali ramka."
+}
