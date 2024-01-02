@@ -4,6 +4,9 @@ import 'package:six_module/lesson/lesson_1/lesson_1.dart';
 import 'package:six_module/lesson/lesson_2/localization.dart';
 import 'package:six_module/lesson/lesson_2/task_1.dart';
 import 'package:six_module/lesson/lesson_2/task_2.dart';
+import 'package:six_module/lesson/lesson_3/shared_preferences.dart';
+import 'package:six_module/lesson/lesson_3/task_1.dart';
+import 'package:six_module/lesson/lesson_3/task_2.dart';
 import 'package:six_module/pages/home_page.dart';
 
 void main() async {
@@ -44,7 +47,10 @@ class MyApp extends StatelessWidget {
         Lesson1.id: (context) => const Lesson1(),
         LocalizationPage.id: (context) => const LocalizationPage(),
         Task1.id: (context) => const Task1(),
-        Task2.id: (context) => const Task2()
+        Task2.id: (context) => const Task2(),
+        SharePreferences.id :(context) => const SharePreferences(),
+        Task1Lesson3.id :(context) => const Task1Lesson3(),
+        Task2Lesson3.id :(context) => const Task2Lesson3(),
       },
     );
   }

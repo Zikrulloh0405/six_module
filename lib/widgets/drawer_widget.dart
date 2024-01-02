@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:six_module/lesson/lesson_1/lesson_1.dart';
 import 'package:six_module/lesson/lesson_2/localization.dart';
+import 'package:six_module/lesson/lesson_3/shared_preferences.dart';
 import 'package:six_module/models/pages_model.dart';
 import 'package:six_module/pages/home_page.dart';
 import 'package:six_module/widgets/all_widgets.dart';
@@ -65,5 +66,6 @@ Widget _materButtn({required Pages pages}) {
 final List<Pages> _pages = [
   Pages(nameOfPage: HomePage.id, nameOfPageButton: 'HomePage'),
   Pages(nameOfPage: Lesson1.id, nameOfPageButton: 'Lesson 1'),
-  Pages(nameOfPage: LocalizationPage.id, nameOfPageButton: 'Lesson 2')
+  Pages(nameOfPage: LocalizationPage.id, nameOfPageButton: 'Lesson 2'),
+  Pages(nameOfPage: SharePreferences.id, nameOfPageButton: 'Lesson 3'),
 ];
