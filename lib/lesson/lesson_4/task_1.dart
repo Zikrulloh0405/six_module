@@ -1,6 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:six_module/widgets/all_widgets.dart';
-import 'package:six_module/widgets/drawer_widget.dart';
+import 'package:hive/hive.dart';
+import 'package:six_module/lesson/lesson_4/hive_servise.dart';
+import 'package:six_module/lesson/lesson_4/user_list.dart';
+// import 'package:modul6/models/user_model.dart';
+
+import '../../services/hive_service.dart';
+import '../../widgets/all_widgets.dart';
 
 class Task1Lesson4 extends StatefulWidget {
   const Task1Lesson4({super.key});
@@ -11,18 +18,40 @@ class Task1Lesson4 extends StatefulWidget {
 }
 
 class _Task1Lesson4State extends State<Task1Lesson4> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  bool isLoginned = true;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool isLoggedIn = true;
+
+  void storeUser() async {
+    await Hive.openBox('user_account');
+    var userData = [
+      """username: ${_emailController.text},
+        userPassword: ${_passwordController.text},
+        userPhone: ${_phoneNumberController.text}"""
+    ];
+
+    setState(() {
+      HiveService.saveAsString(userData);
+      log(userData.toString());
+    });
+  }
+
+  void getUserDataFromLocal() {
+    List<String> userData = HiveService.getUserDataFromLocal();
+    log(userData.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         color: const Color.fromRGBO(7, 127, 123, 1),
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,7 +62,7 @@ class _Task1Lesson4State extends State<Task1Lesson4> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  isLoginned
+                  isLoggedIn
                       ? Padding(
                           padding: const EdgeInsets.only(bottom: 20),
                           child: CircleAvatar(
@@ -45,7 +74,7 @@ class _Task1Lesson4State extends State<Task1Lesson4> {
                       textColor: const Color.fromARGB(250, 87, 209, 205)),
                   spaceWidget(direction: 1, spaceSize: 10),
                   textWidget(
-                      textInput: isLoginned ? 'Sign On' : "Sign Up",
+                      textInput: isLoggedIn ? 'Sign In' : "Sign Up",
                       textColor: Colors.white,
                       textFontSize: 35,
                       textFontWeight: FontWeight.bold),
@@ -67,7 +96,7 @@ class _Task1Lesson4State extends State<Task1Lesson4> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //! emaill
+                    //! email
                     textWidget(
                         textInput: "Email",
                         textFontSize: 20,
@@ -85,7 +114,7 @@ class _Task1Lesson4State extends State<Task1Lesson4> {
                     ),
 
                     //! number
-                    isLoginned
+                    isLoggedIn
                         ? const SizedBox.shrink()
                         : Padding(
                             padding: const EdgeInsets.only(top: 20),
@@ -125,8 +154,8 @@ class _Task1Lesson4State extends State<Task1Lesson4> {
                           hintStyle: TextStyle(color: Colors.grey)),
                     ),
 
-                    //! forgor password
-                    isLoginned
+                    //! forgot password
+                    isLoggedIn
                         ? Padding(
                             padding: const EdgeInsets.only(top: 20),
                             child: Align(
@@ -141,6 +170,7 @@ class _Task1Lesson4State extends State<Task1Lesson4> {
                           )
                         : const SizedBox.shrink(),
                     spaceWidget(direction: 1, spaceSize: 20),
+                    //! SIGN IN BUTTON
                     Align(
                       alignment: Alignment.center,
                       child: MaterialButton(
@@ -149,31 +179,35 @@ class _Task1Lesson4State extends State<Task1Lesson4> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
                         color: const Color.fromRGBO(7, 127, 123, 1),
-                        onPressed: () {},
+                        onPressed: () {
+                          storeUser();
+                          // getUserDataFromLocal();
+                          Navigator.of(context).pushNamed(UserList.id);
+                        },
                         child: textWidget(
-                            textInput: isLoginned ? "Sign In" : "Sign Up",
+                            textInput: isLoggedIn ? "Sign In" : "Sign Up",
                             textColor: Colors.white,
                             textFontWeight: FontWeight.bold),
                       ),
                     ),
 
-                    //! dont' have anaccount
+                    //! don't have an account
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         textWidget(
-                            textInput: isLoginned
+                            textInput: isLoggedIn
                                 ? "Don't have an account ?"
                                 : "Already have an account ?",
                             textColor: Colors.grey,
                             textFontSize: 17.9),
                         TextButton(
                             onPressed: () {
-                              isLoginned = !isLoginned;
+                              isLoggedIn = !isLoggedIn;
                               setState(() {});
                             },
                             child: textWidget(
-                                textInput: isLoginned ? "Sign Up" : "Sign In",
+                                textInput: isLoggedIn ? "Sign Up" : "Sign In",
                                 textFontWeight: FontWeight.bold,
                                 textFontSize: 18,
                                 textColor:

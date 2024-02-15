@@ -1,5 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:six_module/widgets/all_widgets.dart';
+import 'package:hive/hive.dart';
+import 'package:six_module/lesson/lesson_4/hive_servise.dart';
+import 'package:six_module/lesson/lesson_4/user_list.dart';
+
+import '../../models/user_model.dart';
+import '../../widgets/all_widgets.dart';
 
 class Task2Lesson4 extends StatefulWidget {
   const Task2Lesson4({super.key});
@@ -17,6 +24,19 @@ class _Task2Lesson4State extends State<Task2Lesson4> {
   bool isPasswordVisible = false;
 
   bool isLoginned = true;
+  void storeUser() async {
+    await Hive.openBox('user_account');
+    //Use Hive Service
+    var user = User(
+      userEmail: userEmailController.text,
+      userPassword: userPasswordController.text,
+      userPhone: userPhoneController.text,
+    );
+    setState(() {
+      HiveService.storeUser(user);
+      log(user.toJson().toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +128,12 @@ class _Task2Lesson4State extends State<Task2Lesson4> {
                 // splashRadius: 90,
                 padding: EdgeInsets.zero,
                 elevation: 1,
-                shape: CircleBorder(),
-                onPressed: () {},
+                shape: const CircleBorder(),
+                onPressed: () {
+                  storeUser();
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (ctx) => const UserList()));
+                },
                 child: Image.asset(
                   "assets/images/next_button.png",
                   height: 70,
