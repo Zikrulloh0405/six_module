@@ -12,6 +12,7 @@ import 'package:six_module/lesson/lesson_4/data_base_lesson_4.dart';
 import 'package:six_module/lesson/lesson_4/home_page.dart';
 import 'package:six_module/lesson/lesson_4/task_1.dart';
 import 'package:six_module/lesson/lesson_4/task_2.dart';
+import 'package:six_module/lesson/lesson_5/class_lesson_5.dart';
 import 'package:six_module/pages/home_page.dart';
 
 void main() async {
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
         Lesson4HomePage.id: (context) => const Lesson4HomePage(),
         Task1Lesson4.id: (context) => const Task1Lesson4(),
         Task2Lesson4.id: (context) => const Task2Lesson4(),
+        Lesson5HomePage.id :(context) => const Lesson5HomePage()
       },
     );
   }

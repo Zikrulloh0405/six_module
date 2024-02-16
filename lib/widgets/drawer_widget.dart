@@ -3,6 +3,7 @@ import 'package:six_module/lesson/lesson_1/lesson_1.dart';
 import 'package:six_module/lesson/lesson_2/localization.dart';
 import 'package:six_module/lesson/lesson_3/shared_preferences.dart';
 import 'package:six_module/lesson/lesson_4/data_base_lesson_4.dart';
+import 'package:six_module/lesson/lesson_5/class_lesson_5.dart';
 import 'package:six_module/models/pages_model.dart';
 import 'package:six_module/pages/home_page.dart';
 import 'package:six_module/widgets/all_widgets.dart';
@@ -69,5 +70,6 @@ final List<Pages> _pages = [
   Pages(nameOfPage: Lesson1.id, nameOfPageButton: 'Lesson 1'),
   Pages(nameOfPage: LocalizationPage.id, nameOfPageButton: 'Lesson 2'),
   Pages(nameOfPage: SharePreferences.id, nameOfPageButton: 'Lesson 3'),
-  Pages(nameOfPage: DataBase.id, nameOfPageButton: "Lesson 4")
+  Pages(nameOfPage: DataBase.id, nameOfPageButton: "Lesson 4"),
+  Pages(nameOfPage: Lesson5HomePage.id, nameOfPageButton: "Lesson 5"),
 ];
